@@ -26,8 +26,18 @@ namespace TicTacToe0808.Web.Pages
         public void OnGet()
         {
             var a = Request.Query["id"];
-
             CellClicked = a.ToString();
+
+            if(!string.IsNullOrEmpty(CellClicked))
+            {
+                var parts = CellClicked.Split(',');
+                var rowIndex = int.Parse(parts[0]);
+                var colIndex = int.Parse(parts[1]);
+
+                TicTacToe.MakeMove(rowIndex, colIndex);
+
+                var test = TicTacToe.GetFieldValue(rowIndex, colIndex);
+            }
         }
     }
 }
