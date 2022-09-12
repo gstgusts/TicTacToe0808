@@ -55,6 +55,12 @@
             return res;
         }
 
+        public string GetFieldValue(int rowIndex, int columnIndex)
+        {
+            var val = Field[rowIndex, columnIndex];
+            return val == FieldValueEnum.Empty ? "-" : val.ToString();
+        }
+
         private GameResultEnum CheckWinner()
         {
             var resHorVert = CheckHorizontalAndVertical();

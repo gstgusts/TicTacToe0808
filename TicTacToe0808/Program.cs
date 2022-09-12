@@ -12,16 +12,6 @@ namespace TicTacToe0808.Simple
             {
                 UIHelper.DrawBoard(game.Field);
 
-                // var input = UserInputHelper.GetRowAndColumn();
-
-                //var input = UserInputHelper.GetRowAndColumn2();
-                //input.Item1;
-                //input.Item2;
-
-                //var input = UserInputHelper.GetRowAndColumn3();
-                //input.RowIndex;
-                //input.ColumnIndex;
-
                 (int row, int column) = UserInputHelper.GetRowAndColumn();
 
                 var result = game.MakeMove(row, column);
