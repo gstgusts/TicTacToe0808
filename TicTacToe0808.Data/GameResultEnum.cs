@@ -8,7 +8,7 @@ namespace TicTacToe0808.Data
 {
     public enum GameResultEnum
     {
-        Duece,
+        Draw,
         XWon,
         OWon,
         Continue

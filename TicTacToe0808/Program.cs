@@ -7,8 +7,9 @@ namespace TicTacToe0808.Simple
         static void Main(string[] args)
         {
             var game = new Game();
+            bool continueGame = true;
 
-            while(true)
+            while (continueGame)
             {
                 UIHelper.DrawBoard(game.Field);
 
@@ -24,11 +25,23 @@ namespace TicTacToe0808.Simple
 
                 switch (result)
                 {
-                    case GameResultEnum.Duece:
+                    case GameResultEnum.Draw:
+                        Console.WriteLine();
+                        Console.WriteLine("It's a draw!");
+                        UIHelper.DrawBoard(game.Field);
+                        continueGame = false;
                         break;
                     case GameResultEnum.XWon:
+                        Console.WriteLine();
+                        Console.WriteLine("X is the winner!");
+                        UIHelper.DrawBoard(game.Field);
+                        continueGame = false;
                         break;
                     case GameResultEnum.OWon:
+                        Console.WriteLine();
+                        Console.WriteLine("O is the winner!");
+                        UIHelper.DrawBoard(game.Field);
+                        continueGame = false;
                         break;
                 }
             }
