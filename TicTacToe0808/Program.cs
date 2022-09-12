@@ -7,43 +7,43 @@ namespace TicTacToe0808.Simple
         static void Main(string[] args)
         {
             var game = new Game();
-            bool continueGame = true;
 
-            while (continueGame)
+            while (game.ContinueGame)
             {
                 UIHelper.DrawBoard(game.Field);
 
-                Console.Write("Please enter row and column (enter comma seperated values): ");
-                var userInput = Console.ReadLine();
+                // var input = UserInputHelper.GetRowAndColumn();
 
-                var values = userInput.Split(",", StringSplitOptions.TrimEntries);
+                //var input = UserInputHelper.GetRowAndColumn2();
+                //input.Item1;
+                //input.Item2;
 
-                var rowIndex = int.Parse(values[0]);
-                var columnIndex = int.Parse(values[1]);
+                //var input = UserInputHelper.GetRowAndColumn3();
+                //input.RowIndex;
+                //input.ColumnIndex;
 
-                var result = game.MakeMove(rowIndex, columnIndex);
+                (int row, int column) = UserInputHelper.GetRowAndColumn();
+
+                var result = game.MakeMove(row, column);
 
                 switch (result)
                 {
                     case GameResultEnum.Draw:
-                        Console.WriteLine();
-                        Console.WriteLine("It's a draw!");
-                        UIHelper.DrawBoard(game.Field);
-                        continueGame = false;
+                        UIHelper.PrintResult("It's a draw!");
                         break;
                     case GameResultEnum.XWon:
-                        Console.WriteLine();
-                        Console.WriteLine("X is the winner!");
-                        UIHelper.DrawBoard(game.Field);
-                        continueGame = false;
+                        UIHelper.PrintResult("X is the winner!");
                         break;
                     case GameResultEnum.OWon:
-                        Console.WriteLine();
-                        Console.WriteLine("O is the winner!");
-                        UIHelper.DrawBoard(game.Field);
-                        continueGame = false;
+                        UIHelper.PrintResult("O is the winner!");
                         break;
                 }
+
+                if(result != GameResultEnum.Continue)
+                {
+                    UIHelper.DrawBoard(game.Field);
+                }
+               
             }
         }
     }

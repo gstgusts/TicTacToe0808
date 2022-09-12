@@ -5,6 +5,8 @@
         public const int Size = 3;
         public bool IsXPlaying { get; set; }
 
+        public bool ContinueGame { get; set; } = true;
+
         public FieldValueEnum[,] Field { get; set; } = new FieldValueEnum[Size, Size];
 
         public Game()
@@ -43,10 +45,36 @@
 
             IsXPlaying = !IsXPlaying;
 
-            return CheckWinner();
+            var res = CheckWinner();
+
+            if(res != GameResultEnum.Continue)
+            {
+                ContinueGame = false;
+            }
+
+            return res;
         }
 
         private GameResultEnum CheckWinner()
+        {
+            var resHorVert = CheckHorizontalAndVertical();
+
+            if(resHorVert != GameResultEnum.Continue)
+            {
+                return resHorVert;
+            }
+
+            var resDiog = CheckDiognals();
+
+            if(resDiog != GameResultEnum.Continue)
+            {
+                return resDiog;
+            }
+
+            return CheckForDraw();
+        }
+
+        private GameResultEnum CheckHorizontalAndVertical()
         {
             for (int i = 0; i < Size; i++)
             {
@@ -75,6 +103,11 @@
                 }
             }
 
+            return GameResultEnum.Continue;
+        }
+
+        private GameResultEnum CheckDiognals()
+        {
             if (Field[0, 0] == Field[1, 1] && Field[1, 1] == Field[2, 2] && Field[1, 1] != FieldValueEnum.Empty
                 || Field[0, 2] == Field[1, 1] && Field[1, 1] == Field[2, 0] && Field[1, 1] != FieldValueEnum.Empty) //checks diagonals
             {
@@ -88,6 +121,11 @@
                 }
             }
 
+            return GameResultEnum.Continue;
+        }
+
+        private GameResultEnum CheckForDraw()
+        {
             bool allFieldsFull = true;
             for (int i = 0; i < Size; i++) //checks if all fields full even though there is no winner - draw situation
             {

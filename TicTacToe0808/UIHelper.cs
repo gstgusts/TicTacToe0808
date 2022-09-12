@@ -35,5 +35,11 @@ namespace TicTacToe0808.Simple
                 Console.WriteLine(HorizontalLine);
             }
         }
+
+        public static void PrintResult(string result)
+        {
+            Console.WriteLine();
+            Console.WriteLine(result);
+        }
     }
 }
