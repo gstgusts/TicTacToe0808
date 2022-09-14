@@ -12,6 +12,8 @@ namespace TicTacToe0808.Web.Pages
 
         public Game TicTacToe { get; set; }
 
+        public string Message { get; set; }
+
         public string CellClicked { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger)
@@ -20,11 +22,19 @@ namespace TicTacToe0808.Web.Pages
 
             //_game = new Game();
 
-            TicTacToe = new Game();
+            TicTacToe = Program.Game;
         }
 
         public void OnGet()
         {
+            var restart = Request.Query["restart"];
+
+            if(restart == "y")
+            {
+                TicTacToe.Reset();
+                return;
+            }
+            
             var a = Request.Query["id"];
             CellClicked = a.ToString();
 
@@ -34,9 +44,23 @@ namespace TicTacToe0808.Web.Pages
                 var rowIndex = int.Parse(parts[0]);
                 var colIndex = int.Parse(parts[1]);
 
-                TicTacToe.MakeMove(rowIndex, colIndex);
+                var result = TicTacToe.MakeMove(rowIndex, colIndex);
 
-                var test = TicTacToe.GetFieldValue(rowIndex, colIndex);
+                switch (result)
+                {
+                    case GameResultEnum.Draw:
+                        //UIHelper.PrintResult("It's a draw!");
+                        Message = "It's a draw!";
+                        break;
+                    case GameResultEnum.XWon:
+                        //UIHelper.PrintResult("X is the winner!");
+                        Message = "X is the winner!";
+                        break;
+                    case GameResultEnum.OWon:
+                        //UIHelper.PrintResult("O is the winner!");
+                        Message = "O is the winner!";
+                        break;
+                }
             }
         }
     }

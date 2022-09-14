@@ -17,6 +17,7 @@
         public void Reset()
         {
             IsXPlaying = true;
+            ContinueGame = true;
 
             // changes rows
             for (int i = 0; i < Size; i++)

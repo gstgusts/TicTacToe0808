@@ -16,3 +16,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.tic-tac-toe {
+    border: solid 1px #000000;
+    width: 90px;
+    height: 90px
+}

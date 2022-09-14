@@ -8,24 +8,35 @@
     <h1 class="display-4">TicTacToe</h1>
 @*    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
 
-<table style="border:solid 1px #000000; width:90px; height:90px">
-  <tr>
-    <td><a asp-action="" asp-route-id="0,0">@Model.TicTacToe.GetFieldValue(0,0)</a></td>
-    <td><a asp-action="" asp-route-id="0,1">@Model.TicTacToe.GetFieldValue(0,1)</a></td>
-    <td><a asp-action="" asp-route-id="0,2">@Model.TicTacToe.GetFieldValue(0,2)</a></td>
-  </tr>
-  <tr>
-    <td><a asp-action="" asp-route-id="1,0">@Model.TicTacToe.GetFieldValue(1,0)</a></td>
-    <td><a asp-action="" asp-route-id="1,1">@Model.TicTacToe.GetFieldValue(1,1)</a></td>
-    <td><a asp-action="" asp-route-id="1,2">@Model.TicTacToe.GetFieldValue(1,2)</a></td>
-  </tr>
-  <tr>
-    <td><a asp-action="" asp-route-id="2,0">@Model.TicTacToe.GetFieldValue(2,0)</a></td>
-    <td><a asp-action="" asp-route-id="2,1">@Model.TicTacToe.GetFieldValue(2,1)</a></td>
-    <td><a asp-action="" asp-route-id="2,2">@Model.TicTacToe.GetFieldValue(2,2)</a></td>
-  </tr>
-</table>
+    @if(Model.TicTacToe.ContinueGame)
+    {
+        <table class="tic-tac-toe">
+          <tr>
+            <td><a asp-action="" asp-route-id="0,0">@Model.TicTacToe.GetFieldValue(0,0)</a></td>
+            <td><a asp-action="" asp-route-id="0,1">@Model.TicTacToe.GetFieldValue(0,1)</a></td>
+            <td><a asp-action="" asp-route-id="0,2">@Model.TicTacToe.GetFieldValue(0,2)</a></td>
+          </tr>
+          <tr>
+            <td><a asp-action="" asp-route-id="1,0">@Model.TicTacToe.GetFieldValue(1,0)</a></td>
+            <td><a asp-action="" asp-route-id="1,1">@Model.TicTacToe.GetFieldValue(1,1)</a></td>
+            <td><a asp-action="" asp-route-id="1,2">@Model.TicTacToe.GetFieldValue(1,2)</a></td>
+          </tr>
+          <tr>
+            <td><a asp-action="" asp-route-id="2,0">@Model.TicTacToe.GetFieldValue(2,0)</a></td>
+            <td><a asp-action="" asp-route-id="2,1">@Model.TicTacToe.GetFieldValue(2,1)</a></td>
+            <td><a asp-action="" asp-route-id="2,2">@Model.TicTacToe.GetFieldValue(2,2)</a></td>
+          </tr>
+        </table>
+    }
+
 
 <p>@Model.CellClicked</p>
+
+<p>@Model.Message</p>
+
+    @if(!Model.TicTacToe.ContinueGame)
+    {
+        <p><a asp-action="" asp-route-restart="y">Play new game</a></p>
+    }
 
 </div>
